@@ -1,0 +1,87 @@
+#Origin pool
+{
+  "metadata": {
+    "name": "shali-c13-gpu-pool",
+    "namespace": "shali-ns3-gpu",
+    "labels": {},
+    "annotations": {},
+    "description": null,
+    "disable": null
+  },
+  "spec": {
+    "origin_servers": [
+      {
+        "labels": {},
+        "k8s_service": {
+          "service_name": "opendatacam.shali-ns3-gpu",
+          "site_locator": {
+            "virtual_site": {
+              "tenant": "volt-field-vhptnhxg",
+              "namespace": "shared",
+              "name": "shali-gpu"
+            }
+          },
+          "vk8s_networks": {}
+        }
+      }
+    ],
+    "no_tls": {},
+    "port": 80,
+    "same_as_endpoint_port": {},
+    "healthcheck": null,
+    "loadbalancer_algorithm": "ROUND_ROBIN",
+    "endpoint_selection": "LOCAL_PREFERRED",
+    "advanced_options": null
+  },
+  "resource_version": null
+}
+
+
+#LoadBalancer
+
+{
+  "metadata": {
+    "name": "shali-c13-gpu",
+    "namespace": "shali-ns3-gpu",
+    "labels": {},
+    "annotations": {},
+    "description": null,
+    "disable": null
+  },
+  "spec": {
+    "domains": [
+      "dummy.localhost"
+    ],
+    "http": {
+      "dns_volterra_managed": null
+    },
+    "advertise_on_public_default_vip": {},
+    "default_route_pools": [
+      {
+        "pool": {
+          "tenant": "volt-field-vhptnhxg",
+          "namespace": "shali-ns3-gpu",
+          "name": "shali-c13-gpu-pool"
+        },
+        "weight": 1,
+        "endpoint_subsets": {}
+      }
+    ],
+    "routes": null,
+    "cors_policy": null,
+    "disable_waf": {},
+    "add_location": null,
+    "no_challenge": {},
+    "more_option": null,
+    "user_identification": null,
+    "disable_rate_limit": {},
+    "malicious_user_mitigation": null,
+    "waf_exclusion_rules": null,
+    "blocked_clients": null,
+    "trusted_clients": null,
+    "ddos_mitigation_rules": null,
+    "service_policies_from_namespace": {},
+    "round_robin": {}
+  },
+  "resource_version": null
+}
