@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: videostream
+  name: videostream
+spec:
+  ports:
+  - name: "80"
+    port: 80
+    targetPort: 8080
+  - name: "1935"
+    port: 1935
+    targetPort: 1935
+  selector:
+    app: videostream
+    tier: frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: videostream
+  name: videostream
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: videostream
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: videostream
+        tier: frontend
+    spec:
+      containers:
+      - image: alqutami/rtmp-hls:latest-alpine
+        name: videostream
+        ports:
+        - containerPort: 8080
+        - containerPort: 1935
+        resources: {}
+        securityContext:
+          privileged: true
+      restartPolicy: Always

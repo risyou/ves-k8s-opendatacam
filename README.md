@@ -40,10 +40,10 @@ cd ves-k8s-opendatacam
 kubectl create configmap opendatacam --from-file=config.json --dry-run -o yaml | kubectl apply -f -
 
 #Create mongodb to store data
-kubectl apply -f 0001-mongodb-deployment.yaml
+kubectl apply -f opendatacam/0001-mongodb-deployment.yaml
 
 #Create opendataacm deployment
-kubectl apply -f 0002-opendatacam-deployment.yaml
+kubectl apply -f opendatacam/0002-opendatacam-deployment.yaml
 ```
 You will have the following service and deployments
 

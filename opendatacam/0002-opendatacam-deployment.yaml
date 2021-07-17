@@ -44,11 +44,13 @@ spec:
         command: ["/bin/bash"]
         args: ["-c", "/var/local/opendatacam/launch.sh"]
         name: opendatacam
+        resources:
+          limits:
+            nvidia.com/gpu: 1
         ports:
         - containerPort: 8080
         - containerPort: 8071
         - containerPort: 8090
-        resources: {}
         securityContext:
           privileged: true
         volumeMounts:
